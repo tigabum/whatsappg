@@ -3,7 +3,7 @@ import React,{useState,useEffect} from 'react'
 
 import './ChatLists.css'
 
-function ChatLists({addNewChat}) {
+function ChatLists({addNewChat, name}) {
             const [pic, setPic] = useState("");   
 
             useEffect(() =>{
@@ -21,7 +21,7 @@ function ChatLists({addNewChat}) {
         <div className="chatlists" >
                 <Avatar src= {` https://avatars.dicebear.com/api/human/${pic}.svg` } />
                 <div className="avatar_info">
-                    <h3>username</h3>
+                    <h3>{name} </h3>
                     <p>some texts below</p>
                 </div>
            
