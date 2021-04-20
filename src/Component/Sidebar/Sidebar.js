@@ -16,7 +16,8 @@ function Sidebar() {
             (snapshot)=>
             setRooms(snapshot.docs.map((doc)=>(
               
-               {
+               {    
+                   id:doc.id,
                    data:doc.data()
                }
             )))
@@ -59,8 +60,10 @@ function Sidebar() {
                <ChatLists addNewChat />
                {rooms.map((room,index)=>
                     <ChatLists 
+                        id={room.id}
                         key={room.data.name+index+1}
                         name={room.data.name}
+                        message= {room.data.message}
                     />
                )}
                

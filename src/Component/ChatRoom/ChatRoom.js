@@ -6,6 +6,7 @@ import AttachFileIcon from '@material-ui/icons/AttachFile';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import MicIcon from '@material-ui/icons/Mic';
+import db from '../../firebase';
 
 function ChatRoom() {
     const [input, setInput] = useState("");
@@ -14,6 +15,7 @@ function ChatRoom() {
 useEffect(() => {
     setAva(Math.round(Math.random()*5000))
 }, [])
+
 
 
 const sendMessage = (e)=>{
@@ -50,15 +52,23 @@ const sendMessage = (e)=>{
                  <span className="chat_timestamp" >4:32am</span>
                  Hello,everyone
             </p>
+            <p className="chat_text chat_receiver">new chat</p>
             
           </div>
           <div className="chat_bottom">
-              <InsertEmoticonIcon/>
+              <IconButton>
+                   <InsertEmoticonIcon/>
+
+              </IconButton>
+             
               <form action="">
                   <input value={input} onChange={(e)=>setInput(e.target.value) } type="text" placeholder="Type a message" />
                   <button onClick={sendMessage} >Search</button>
               </form>
-              <MicIcon/>
+              <IconButton>
+                  <MicIcon/>
+              </IconButton>
+              
 
 
           </div>
