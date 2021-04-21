@@ -7,15 +7,28 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import MicIcon from '@material-ui/icons/Mic';
 import db from '../../firebase';
+import { useParams } from 'react-router';
 
 function ChatRoom() {
     const [input, setInput] = useState("");
+    const{roomId} = useParams();
+    const[roomName, setRoomName] = useState("");
 
   const [ava, setAva]  = useState("");
+
+
 useEffect(() => {
     setAva(Math.round(Math.random()*5000))
-}, [])
+}, [roomId])
 
+    useEffect(() => {
+        if(roomId){
+            db.collection("rooms").doc(roomId).onSnapshot((snapshot)=>
+                    setRoomName(snapshot.data().name)
+            )
+        }
+       
+    }, [roomId])
 
 
 const sendMessage = (e)=>{
@@ -29,7 +42,7 @@ const sendMessage = (e)=>{
           <div className="chat_header">
               <Avatar src= {`https://avatars.dicebear.com/api/human/${ava}.svg`} />
               <div className="chat_info">
-                  <h4>Username</h4> 
+                  <h4>{roomName} </h4> 
                   <p>last seen @4:34pm</p>
               </div>
               <div className="header_icon">
@@ -55,6 +68,7 @@ const sendMessage = (e)=>{
             <p className="chat_text chat_receiver">new chat</p>
             
           </div>
+
           <div className="chat_bottom">
               <IconButton>
                    <InsertEmoticonIcon/>

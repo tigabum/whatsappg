@@ -7,7 +7,7 @@ import { Avatar, IconButton } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import ChatLists from '../ChatLists/ChatLists';
 import db from '../../firebase'
-function Sidebar() {
+function Sidebar({user} ) {
    const [rooms, setRooms] = useState([]);
 
    useEffect( ()=>{
@@ -31,7 +31,7 @@ function Sidebar() {
            {/* Search */}
            {/* Chat */}
             <div className="sidebar_header">
-               <Avatar/>
+               <Avatar src={user.photoURL} />
                 <div className="sidebar_header_right">
                     <IconButton>
                       <DonutLargeIcon />  
