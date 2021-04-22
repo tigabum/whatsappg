@@ -34,8 +34,7 @@ useEffect(() => {
        db.collection("rooms").doc(roomId)
        .collection("messages").orderBy("timestamp", "asc")
        .onSnapshot((snapshot)=>
-        setMessage(snapshot.docs.map((doc)=>
-        doc.data()))
+        setMessage(snapshot.docs.map((doc)=> doc.data()))
        )
        
     }, [roomId])
@@ -44,13 +43,13 @@ useEffect(() => {
 
 const sendMessage = (e)=>{
     e.preventDefault();
-        if(roomId){
+        
             db.collection("rooms").doc(roomId).collection("messages").add({
                 username:user.displayName,
                 message:input,
                 timestamp:firebase.firestore.FieldValue.serverTimestamp()
             })
-        }
+        
 
     setInput("");
 
@@ -62,7 +61,7 @@ const sendMessage = (e)=>{
               <Avatar src= {`https://avatars.dicebear.com/api/human/${ava}.svg`} />
               <div className="chat_info">
                   <h4>{roomName} </h4> 
-                  <p>last seen{" "} {new Date(message[message.length-1]?.timestamp?.
+                  <p> last seen{" "} {new Date(message[message.length-1]?.timestamp?.
                         toDate()).toUTCString()
                     } </p>
               </div>
@@ -84,7 +83,7 @@ const sendMessage = (e)=>{
             {
              message.map((item,index) =>(
                  <>
-                  <p key={index+item.username} className={` chat_text ${!(message.username === user.displayName) && 'chat_receiver'}`}>
+                  <p key={index+item.username} className={` chat_text ${item.username == user.displayName && 'chat_receiver'}`}>
                      <span className="chat_timestamp" >{ new Date(item.timestamp?.toDate()).toUTCString() } </span>
                 <span className="chat_username">{item.username} </span>
                 
