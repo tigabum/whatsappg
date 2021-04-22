@@ -6,9 +6,17 @@ import db from '../../firebase';
 import './ChatLists.css'
 
 function ChatLists({addNewChat,id, name, message}) {
-            const [pic, setPic] = useState("");   
+            const [pic, setPic] = useState("");  
+            const [messages, setMessages] = useState([]); 
             
-
+            useEffect(() => {
+               if(id){
+                db.collection("rooms").doc(id).collection("messages")
+                .onSnapshot((snapshot)=>
+                    setMessages(snapshot.docs.map((doc)=> doc.data()))
+                )
+               }
+            }, [id])
             useEffect(() =>{
                 setPic(Math.round(Math.random()*5000))
             }, []) 
@@ -28,11 +36,11 @@ function ChatLists({addNewChat,id, name, message}) {
 
     return !addNewChat ? (
         <Link to={`/rooms/${id}`} >
-         <div className="chatlists" >
+         <div style={{textDecoration:'none'}} className="chatlists" >
                 <Avatar src= {` https://avatars.dicebear.com/api/human/${pic}.svg` } />
                 <div className="avatar_info">
                     <h3>{name} </h3>
-                    <p>{message} </p>
+                    <p>{messages[0]?.message} </p>
                 </div>  
         </div>
         </Link>

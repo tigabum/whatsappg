@@ -12,25 +12,25 @@
     position: relative;
     font-size: 16px;
   margin-bottom: 30px;
+
     
 }
 .chat_receiver{
     margin-left: auto;
     background-color: #dcf8c6;
+    width: fit-content;
 
 }
 .chat_username{
     position: absolute;
-    top: -15px;
+    top: -12px;
     font-size: xx-small;
 }
 .chat_timestamp{
-    position: absolute;
     font-size: xx-small;
-    bottom: 0;
-    right: 0;
-    padding: 2px;
     color: gray;
+    float: right;
+    margin: 5px;
 
 }
 .chat_header{

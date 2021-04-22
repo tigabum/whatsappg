@@ -63,7 +63,7 @@ function Sidebar({user} ) {
                         id={room.id}
                         key={room.data.name+index+1}
                         name={room.data.name}
-                        message= {room.data.message}
+                        message= {room.data.lastseen}
                     />
                )}
                
